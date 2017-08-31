@@ -1,6 +1,6 @@
 <?php
 
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +13,20 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+Route::group(['namespace' => 'Api', 'as' => 'api::'], function () {
+    Route::group(['as' => 'user::', 'prefix' => 'user'], function () {
+        Route::post('/register', ['uses' => 'UserController@register'])->name('register');
+        Route::post('/logout', ['uses' => 'UserController@logout'])->name('logout')->middleware('auth:api');
+
+
+        Route::get('/profile', [ 'uses' => 'UserController@profile'])->name('profile')->middleware('auth:api');
+    });
+    Route::group(['as' => 'note::', 'prefix' => 'note'], function () {
+        Route::post('/create', [ 'uses' => 'NoteController@create'])->name('create')->middleware('auth:api');
+        Route::post('/update/{id}', [ 'uses' => 'NoteController@update'])->name('update')->middleware('auth:api');
+
+        Route::get('/index', [ 'uses' => 'NoteController@index'])->name('index')->middleware('auth:api');
+        Route::get('/show/{id}', [ 'uses' => 'NoteController@show'])->name('show')->middleware('auth:api');
+
+    });
 });

@@ -22,3 +22,13 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
         'remember_token' => str_random(10),
     ];
 });
+
+
+$factory->define(App\Note::class, function (Faker\Generator $faker) {
+    return [
+        'title' =>  $faker->catchPhrase,
+        'description' => $faker->paragraph($nbSentences = 3, $variableNbSentences = true),
+        'user_id' => App\User::inRandomOrder()->value('id'),
+    ];
+});
+
