@@ -1,3 +1,5 @@
 ## About App
 
-This application based on API Authentication (Passport) and Vue.js frontend. I Am do that first time. Time to ready 
+Test application based on API Authentication (Passport) and Vue.js frontend. I Am do that first time. Time to ready 7 hours.
+
+Video with front action: https://www.youtube.com/watch?v=bX73d930nVY
