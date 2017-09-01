@@ -9,4 +9,4 @@ Files changed: https://github.com/zogxray/TestTask/pull/1/files
 Front: http://passport.pavlov.od.ua
 
 
-Test user who has demo notes: zogxray@gmail.com 777777 (Or register new in form)
+Test user who has demo notes: zogxray@gmail.com 777777 (Or register new in login form (Click twice to register and enter))
