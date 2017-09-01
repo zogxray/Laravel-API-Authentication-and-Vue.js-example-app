@@ -60,7 +60,7 @@ const app = new Vue({
                     var refresh_token_interval = setInterval(function(){
                         self.refresh(self.tokens.refresh_token)
                         clearInterval(refresh_token_interval);
-                    }, Math.abs((self.tokens.expires_in/60)*(1000*60)));
+                    }, Math.abs(((self.tokens.expires_in/60)*(1000*60))-500));
                 }
             },
             deep: true
