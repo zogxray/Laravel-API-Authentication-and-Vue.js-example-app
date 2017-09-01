@@ -21,15 +21,6 @@ class UserController extends Controller
 
         $client = Client::where('id', 1)->first();
 
-//        $request->request->add([
-//            'grant_type'    => 'password',
-//            'client_id'     => $client->id,
-//            'client_secret' => $client->secret,
-//            'username'      => $request->get('email'),
-//            'password'      => $request->get('password'),
-//            'scope'         => '',
-//        ]);
-
         $http = new \GuzzleHttp\Client();
 
         $response = $http->post(url('/').'/oauth/token', [
