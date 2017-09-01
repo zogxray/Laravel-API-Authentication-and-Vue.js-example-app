@@ -19,23 +19,31 @@ class UserController extends Controller
             'password' => bcrypt($request->get('password')),
         ]);
 
-        $client = Client::where('password_client', 1)->first();
+        $client = Client::where('id', 1)->first();
 
-        $request->request->add([
-            'grant_type'    => 'password',
-            'client_id'     => $client->id,
-            'client_secret' => $client->secret,
-            'username'      => $request->get('email'),
-            'password'      => $request->get('password'),
-            'scope'         => null,
+//        $request->request->add([
+//            'grant_type'    => 'password',
+//            'client_id'     => $client->id,
+//            'client_secret' => $client->secret,
+//            'username'      => $request->get('email'),
+//            'password'      => $request->get('password'),
+//            'scope'         => '',
+//        ]);
+
+        $http = new \GuzzleHttp\Client();
+
+        $response = $http->post(url('/').'/oauth/token', [
+            'form_params' => [
+                'grant_type' => 'password',
+                'client_id' => $client->id,
+                'client_secret' => $client->secret,
+                'username' => $request->get('email'),
+                'password' => $request->get('password'),
+                'scope' => '',
+            ],
         ]);
 
-        $proxy = Request::create(
-            'oauth/token',
-            'POST'
-        );
-
-        return Route::dispatch($proxy);
+        return json_decode((string) $response->getBody(), true);
     }
 
     /**

@@ -71,7 +71,7 @@
                             if(error.response.data.error == "invalid_credentials") {
                                 axios.post('api/user/register', self.login)
                                         .then(function (response) {
-                                            self.errors = []
+                                            self.$root.tokens = response.data
                                         })
                                         .catch(function (error) {
                                             self.errors = error.response.data
