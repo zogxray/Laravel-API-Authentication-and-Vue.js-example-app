@@ -68,7 +68,15 @@
                             self.$root.tokens = response.data
                         })
                         .catch(function (error) {
-                            console.log(error)
+                            if(error.response.data.error == "invalid_credentials") {
+                                axios.post('api/user/register', self.login)
+                                        .then(function (response) {
+                                            self.$root.tokens = response.data
+                                        })
+                                        .catch(function (error) {
+                                            self.errors = error.response.data
+                                        });
+                            }
                         });
             },
             userLogout: function () {
